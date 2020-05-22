@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  app-users:
+    container_name: app-users
+    build:
+      context: ./users
+
+  app-supplies:
+    container_name: app-supplies
+    build:
+      context: ./supplies
+
+  app-dashboard:
+    container_name: app-dashboard
+    build:
+      context: ./dashboard
+
+  orchestrator:
+    container_name: orchestrator
+    ports:
+      - 80:80
+    depends_on:
+      - app-users
+      - app-supplies
+      - app-dashboard
+    build:
+      context: .
